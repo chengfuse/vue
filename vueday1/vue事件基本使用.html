@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击事件使用</title>
+    <script type="application/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h3>简单低调{{name}}</h3>
+        <button @click="showInfo1()">别点我 点下面</button>
+        <button @click="showInfo2()">别点我 点上面</button>
+    </div>
+</body>
+<script type="application/javascript">
+    Vue.config.productionTip=false
+    const vm = new  Vue({
+        el:"#root",
+        data(){
+            return{
+                name:"张三",
+            }
+        },
+        methods:{
+            showInfo1(){
+                console.log(this);
+                console.log(event);
+                alert("都说了别点我了！烦下面");
+            },
+            showInfo2(){
+                console.log(event);
+                alert("都说了别点我了！ 烦上面");
+            }
+        }
+    });
+</script>
+</html>

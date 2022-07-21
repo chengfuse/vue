@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义指令</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+<!-- vue自定义属性
+    自定义总结:
+      1,定义语法：
+        1.1.局部指令:
+           new  Vue({                      new Vue({
+              directives:{指令名:配置对象} 或    directives{指令名:回调函数}
+           })                                })
+        1.2. 全局指令:
+            Vue.directive(指令名,配置对象) 或 Vue.directive(指令名,回调函数)。
+
+       2, 配置对象中常用的三个回调:
+          2.1 bind :指令与元素成功绑定时调用。
+          2.2 inserted: 指令所在元素被插入页面时调用。
+          2.3 update: 指令所在模板结构被重新解析时调用。
+
+       3,备注
+         3.1指令定义时不加v-，单使用时要加v-
+         3.2指令如果时多个单词，要使用kebab-case命名方式，不要用camelCase命名。
+-->
+<div id="root">
+  你好{{name}}
+  <input type="text" v-chack:value="name"/>
+</div>
+</body>
+<script type="application/javascript">
+  Vue.config.productionTip=true;
+  const  vm=new Vue({
+    el:"#root",
+    data(){
+      return{
+        name:"jack",
+      }
+    },
+    methods:{
+    },
+    directives:{
+      // 'addwidth'(element,binding){
+      //   element.style.color="blue"
+      //   element.style.fontSize="30px";
+      //   element.style.borderBottom=" 1px  solid red";
+      // },
+      //命名不建议使用驼峰  name-name 建议用 'name-name' 原值
+
+      chack:{
+        bind(element,binding){
+          element.value=binding.value;
+        },
+        inserted(element,binding){
+          element.focus();
+        },
+        update(element,binding){
+          console.log(name)
+          element.value=binding.value;
+        }
+      }
+    }
+  });
+</script>
+</html>

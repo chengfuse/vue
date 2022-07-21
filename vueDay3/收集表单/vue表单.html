@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+    <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- v-model
+                .number:表示输入是数子 trim: 输入时不会存入前后输入空格 lazy: 失去焦点在收集数据  -->
+        <form style="width: 450px" @submit.passive="showUserInfo">
+            <h3>梁山好汉技能单:</h3>
+            <hr/>
+            <div>
+                <label for="account">账号:</label>
+                <input type="text" id="account" placeholder="请输入账号" v-model.trim="userInfo.account"/>
+            </div>
+            <div>
+                <label for="password">密码:</label>
+                <input type="password" id="password" placeholder="请输入密码" v-model="userInfo.password"/>
+            </div>
+            <div>
+                <label for="age">年龄:</label>
+                <input type="number" id="age" placeholder="请输入年龄" v-model.number="userInfo.age"/>
+            </div>
+            <div>
+                性别：
+                男<input type="radio"  value="0" v-model="userInfo.sex"/>
+                女<input type="radio"  value="1" v-model="userInfo.sex"/>
+            </div>
+            <div>
+                爱好：
+                <!--       v-model 如果checkbox 没有写入value model会接受boolean值 true false
+                            有value 属性应该用数组接受-->
+                <span v-for="(item ,index) in  hobbies" :key="item.id">
+                    <input type="checkbox" :value="item.id" v-model="userInfo.hobby"/>{{item.value}}
+                </span>
+            </div>
+            <div>
+                技能:
+                <select v-model="userInfo.skill">
+                    <option v-for="(item,index) in skills" :key="item.id" :value="item.id">{{item.value}}</option>
+                </select>
+            </div>
+            <div>
+                个人描述:<br/><textarea v-model.lazy="userInfo.desc"></textarea>
+            </div>
+            <div>
+                <input type="checkbox" v-model="userInfo.isRead">阅读<a href="https://bilibili.com/">《用户协议》</a>
+            </div>
+            <div>
+                <button >提交</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script type="application/javascript">
+    Vue.config.productionTip=true;
+    const  vm=new Vue({
+        el:"#root",
+        data(){
+            return{
+                userInfo:{
+                    account:'',
+                    password:'',
+                    sex:'',
+                    age:'',
+                    hobby:[],
+                    skill:0,
+                    desc:'',
+                    isRead:false,
+                },
+                hobbies:[
+                    {id:0,value:"骑马"},
+                    {id:1,value:"摔跤"},
+                    {id:2,value:"喝酒"},
+                    {id:3,value:"美人"},
+                ],
+                skills:[
+                    {id:0,value:"--请选择--"},
+                    {id:1,value:"身轻如燕"},
+                    {id:2,value:"能打老虎"},
+                    {id:3,value:"摔跤高手"},
+                    {id:4,value:"十八般武器"},
+                    {id:5,value:"无人能挡"},
+                ],
+            }
+        },
+        methods:{
+            showUserInfo(){
+                console.log(this.userInfo);
+                alert("入伙需等通知！")
+            }
+        }
+    });
+</script>
+</html>

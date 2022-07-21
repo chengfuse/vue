@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据监控</title>
+    <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<style>
+    .inputx{
+        width: 250px;
+        height: 15px;
+        padding:3px;
+        outline: none;
+        color: white;
+        background-color: deepskyblue;
+        border: none;
+        border: 0;
+        border-radius: 3px 3px  0px  0px;
+        border-bottom: 2px solid  blue;
+    }
+</style>
+<div id="root">
+    <!-- vue数据监控总结 -->
+    <!--
+        1.Vue会监视data中所有层次的数据。
+
+        2.如何监测对象中的数据？
+            通过setter实现监视，且要在new Vue是就传入要监测的数据
+             2.1 对象中后追加的属性，Vue默认不做响应式处理
+             2.2 如果给后添加的属性做响应式，请使用如下Api:
+                Vue.set(target,propertyName/index（数组使用index）,value);
+                 this.$set(target,propertyName/index（数组使用index）,value) 注:在vue里面用this 在外用const 属性名字；
+
+       3.如何监测数组中的数据？
+            通过包裹数组更新元素的方法实现，本质就是做了两件是:
+                3.1 调用原生对应的方法对数组进行更新
+                3.2 重新解析模板，进行更新页面
+
+       4.在Vue修改数组中的某个元素一定要用如下方法:
+            4.1 使用这些Api: push(),pop(),unshift(),shift(),splice(),sort(),reverse()
+            4.2 Vue.set() 或 vm.$set vm表示new Vue；
+
+       特别注意:Vue.set() 和vm.$set 不能给vm或vm的根数据对象添加属性！！！
+     -->
+    <button @click="school.studentCount='10'">默认人数</button>
+    <button @click="addStudents">学校添加学生人数</button>
+    <button @click="addCountry">印度想加入五常在第一名</button>
+    <button @click="removeCountry">美国踢走印度</button>
+    <button @click="addPerson">声优少了雨宫天</button>
+    <button @click="updatePerson">三奈子改名青木沙子</button>
+    <div>
+        <h3>著名大学：{{school.name}}</h3>
+        <div>地址:{{school.address}}</div>
+        <div>年龄:{{school.age}}</div>
+        <div v-if="school.studentCount">学校人数：{{school.studentCount}}</div>
+    </div>
+    <ul>
+        <h1>.国家</h1>
+        <li v-for="(item,index) in  countries" :key="index">
+            {{item}}
+        </li>
+    </ul>
+    <ul>
+
+        <li v-for="(item,index) in  persons" :key="item.id  ">
+            {{item.name}}-{{item.sex}}-{{item.age}}
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+    Vue.config.productionTip=false;
+    const vm = new Vue({
+        el: "#root",
+        data() {
+            return {
+                keyWord:"",
+                sortType:0,
+                countries:[
+                    "chine",
+                    "france",
+                    "America",
+                    "russia",
+                    "england"
+                ],
+                school:{
+                  name:"家里蹲大学",
+                  address:"未知",
+                  age:"10",
+                },
+                persons:[
+                    {id:0,name:"初音未来",age:46,sex:"女"},
+                    {id:1,name:"日比野未来",age:23,sex:"女"},
+                    {id:2,name:"三奈子",age:47,sex:"女"},
+                    {id:3,name:"竹内结子",age:39,sex:"女"},
+                ],
+                // personFilter:[],
+            }
+        },
+        methods:{
+            addStudents(){
+                //this.$set(this.school,'studentCount',30);
+                Vue.set(this.school,'studentCount',30);
+            },
+            addCountry(){
+                //删除或添加
+                this.countries.splice(5,1,'india');
+            },
+            removeCountry(){
+                if(this.countries.length>5){
+                    this.countries.pop();
+                }
+            },
+            addPerson(){
+                let p={id:4,name:"雨宫天",age:41,sex:"女"};
+                // this.persons.push(p);
+                this.persons.splice(4,1,p);
+            },
+            updatePerson(){
+                this.persons.forEach((p,index)=>{
+                    if(p.name==='三奈子'){
+                        p.name='青木沙子';
+                    }
+                });
+            }
+        },
+    });
+</script>
+</html>

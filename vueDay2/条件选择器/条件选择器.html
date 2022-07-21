@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件选择</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="changeSum">+1</button>
+       <!-- v-if 建议和template一起使用 template不会影响结构 但不能使用v-show-->
+        <h3 v-show="number===2">别在加</h3>
+        <template>
+            <h3 v-if="number===1" >hello word!</h3>
+        </template>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip=false;
+    const vm = new Vue({
+        el: "#root",
+        data() {
+            return {
+                number:0,
+            }
+        },
+        methods: {
+            changeSum(){
+              this.number++;
+            },
+        },
+    });
+</script>
+</html>

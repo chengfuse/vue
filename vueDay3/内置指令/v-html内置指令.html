@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>内置指令</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  你好{{name}}
+  <div v-text="name"></div>
+  <div v-html="str"></div>
+</div>
+</body>
+<script type="application/javascript">
+  Vue.config.productionTip=true;
+  const  vm=new Vue({
+    el:"#root",
+    data(){
+      return{
+        name:"hhhhh",
+        str:"<h1>hhhhh</h1>"
+      }
+    },
+    methods:{
+    }
+  });
+</script>
+</html>

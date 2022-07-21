@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据绑定</title>
+    <script type="application/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>
+            单向数据绑定：<input type="text" v-bind:value="name" >
+        </div>
+        <div>
+            双向数据绑定：<input type="text" v-model:value="name" >
+        </div>
+    </div>
+</body>
+<script type="application/javascript">
+    Vue.config.productionTip=false
+    new  Vue({
+        el:"#root",
+        data(){
+            return{
+                name:"张三",
+            }
+        },
+        methods:{
+
+        }
+    })
+</script>
+</html>

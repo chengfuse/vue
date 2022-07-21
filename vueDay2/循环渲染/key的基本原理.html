@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>key的原理</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<style>
+  .inputx{
+    padding:3px;
+    outline: none;
+    color: white;
+    background-color: lightskyblue;
+    border: none;
+    border: 0;
+    border-radius: 3px 3px  0px  0px;
+    border-bottom: 2px solid  blue;
+  }
+</style>
+<div id="root">
+  <!-- v-for 使用       -->
+  <!--  遍历数据v-for一般使用最多！       -->
+  <h1>日语教师(循环遍历数据)</h1>
+  <button @click="addArr" >点击添加</button>
+  <ul>
+    <!-- vue, react中key有什么作用?
+      1.虚拟DOM中key的作用:
+        key是虚拟DOM对象的标识，当数据发生变化时，vue会根据【新数据】生成新的虚拟DOM，
+        随后Vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较，比较规则入下：
+
+      2.对比规则如下:
+        2.1.旧虚拟DOM中找到了与新虚拟DOM相同的Key:
+          2.1.1 若虚拟DOM中内容没变，直接使用之前的真是DOM！
+          2.1.2 若虚拟DOM中内容变了，则生成新的真是DOM，随后替换页面之前的真是DOM
+        2.2.旧虚拟DOM中未找到与新虚拟DOM相同的Key
+              创建新的真实DOM，随后渲染到到页面。
+      3.用index作为key可能会引发的问题
+         3.1 若数据进行：逆序添加，逆序删除等破坏操作:
+              会产生没有必要的真实DOM更新 ==》 界面效果没有问题，但效率很低
+         3.2 如果结构中还有包换输入类的DOM:
+              会产生错误DOM更新 ==> 界面有问题。
+      4.开发中如何选择key？：
+         4.1 最好使用每条数据的唯一标识坐为key，比如id 手机号 身份证号 等之类的
+         4.2 如果不存在逆序添加或逆序删除的破坏操作，仅用于渲染列表用于展示key用index是没有问题的
+    -->
+    <li v-for="(item,index) in  persons" :key="item.id">
+      {{item.name}}-{{item.sex}}-{{item.age}}
+      <input type="text" class="inputx">
+    </li>
+  </ul>
+</div>
+</body>
+<script>
+  Vue.config.productionTip=false;
+  const vm = new Vue({
+    el: "#root",
+    data() {
+      return {
+        persons:[
+          {id:0,name:"小泽玛利亚",age:46,sex:"女"},
+          {id:1,name:"深田永美",age:23,sex:"女"},
+          {id:2,name:"苍井空",age:47,sex:"女"},
+          {id:3,name:"吉泽明步",age:39,sex:"女"},
+        ],
+      }
+    },
+    methods:{
+      addArr(){
+        let p={id:4,name:"纱仓奈子",age:38,sex:"女"};
+        this.persons.unshift(p);
+      }
+    }
+  });
+</script>
+</html>

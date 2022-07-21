@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>key的原理</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<style>
+  .inputx{
+    width: 250px;
+    height: 15px;
+    padding:3px;
+    outline: none;
+    color: white;
+    background-color: deepskyblue;
+    border: none;
+    border: 0;
+    border-radius: 3px 3px  0px  0px;
+    border-bottom: 2px solid  blue;
+  }
+</style>
+<div id="root">
+  <!-- v-for 使用       -->
+  <!--  遍历数据v-for一般使用最多！       -->
+  <input  type="text" class="inputx" v-model="keyMethod" placeholder="查询你想搜索的日本女明星" />
+  <ul>
+    <li v-for="(item,index) in  personFilter" :key="item.id">
+      {{item.name}}-{{item.sex}}-{{item.age}}
+    </li>
+  </ul>
+</div>
+</body>
+<script>
+  Vue.config.productionTip=false;
+  const vm = new Vue({
+    el: "#root",
+    data() {
+      return {
+        keyMethod:"",
+        persons:[
+          {id:0,name:"初音未来",age:46,sex:"女"},
+          {id:1,name:"日比野未来",age:23,sex:"女"},
+          {id:2,name:"三奈子",age:47,sex:"女"},
+          {id:3,name:"竹内结子",age:39,sex:"女"},
+        ],
+        // personFilter:[],
+      }
+    },
+    methods:{
+    },
+    //watch写法过滤！
+    // watch:{
+    //   keyMethod:{
+    //     immediate:true,
+    //     handler(){
+    //       this.personFilter=this.persons.filter((p)=>{
+    //         return p.name.indexOf(this.keyMethod)!==-1;
+    //       });
+    //     }
+    //   }
+    // }
+    //计算属性写法
+    computed:{
+        personFilter(){
+         return  this.persons.filter((p)=>{
+            return p.name.indexOf(this.keyMethod)!==-1;
+          })
+        }
+    }
+  });
+</script>
+</html>

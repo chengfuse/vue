@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+    <!--
+        深度监视:
+            (1).Vue中的watch默认不监视对象内部值的改变 (一层)
+            (2).配置deep:true可以监测对象内部值的改变 (二层)
+        备注:
+            (1).Vue自身可以监测对象内部值的改变，但Vue提供的watch默认不可以
+            (2).使用watch时根据数据的具体结构，决定是否采用深度监视
+        -->
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+        <h2>a的值时:{{numbers.a}}</h2>
+        <button @click="numbers.a++">a+1</button>
+        <h2>b的值时:{{numbers.b}}</h2>
+        <button @click="numbers.b++">b+2</button>
+    </div>
+</body>
+<script type="application/javascript">
+    Vue.config.productionTip=false;
+    const vm = new Vue({
+        el:"#root",
+        data(){
+          return {
+              isHot:true,
+              numbers:{
+                  a:1,
+                  b:1,
+              },
+          }
+        },
+        methods:{
+            changeWeather(){
+                return this.isHot=!this.isHot;
+            }
+        },
+        computed:{
+            info(){
+               return this.isHot===true? "很热":"凉爽";
+            }
+        },
+        watch:{
+            /*numbers: {
+                deep:true, //深度监视
+                handler(){
+                    console.log('number发生改变！');
+                }
+            }*/
+            //正常写法
+            /*isHot:{
+                immediate: true, //初始化时让handler调用一次
+                deep:true,
+                handler(newValue,oldValue){
+                    console.log('isHot被你修改',newValue,oldValue);
+                }
+            }*/
+            //简写写法
+            /*isHot(){
+                console.log("ishot发生改变！");
+            }*/
+        }
+    });
+    //正常写法
+    /*vm.$watch('isHot',{
+        immediate: true,
+        deep:true,
+        handler(newValue,oldValue){
+            console.log('isHot被你修改',newValue,oldValue);
+        }
+    });*/
+    //简写写法
+    // vm.$watch('isHot',function (newValue,oldValue){
+    //     console.log('isHot被你修改',newValue,oldValue);
+    // });
+</script>
+</html>

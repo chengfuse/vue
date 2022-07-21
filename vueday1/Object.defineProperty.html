@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回顾</title>
+</head>
+<body>
+
+</body>
+<script type="application/javascript">
+    let number=19;
+    let  person={
+        name:"吉泽明步",
+        sex:"女",
+    }
+    Object.defineProperty(person,'age',{
+        // value:18,
+        // enumerable:true, //控制属性是否可以枚举 默认false
+        // writable:true,   //控制属性是否可以修改 默认false
+        // configurable:true,// 控制属性是否可以删除属性 默认false
+        get() { //getter
+            console.log("执行get方法")
+            return number;
+        },
+        set(v){ //setter
+            console.log("执行set方法")
+            number=v;
+        }
+    })
+</script>
+</html>

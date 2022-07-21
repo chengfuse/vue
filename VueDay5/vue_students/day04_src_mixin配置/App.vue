@@ -1,0 +1,37 @@
+<template>
+  <div id="app">
+    <div >{{msg}}</div>
+    <Student name="深田永美" sex="女" :age="38"/>
+    <hr/>
+    <School></School>
+  </div>
+</template>
+
+<script>
+import Student from "@/components/Student";
+import School from "@/components/School";
+export default {
+  name: 'App',
+  components: {
+    Student,School
+  },
+  data(){
+    return{
+      msg:"欢迎来到南京航天大学"
+    }
+  },
+  methods:{
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

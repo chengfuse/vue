@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件选择</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- v-for 使用       -->
+        <!--  遍历数据v-for一般使用最多！       -->
+        <h1>日语教师(循环遍历数据)</h1>
+        <ul>
+            <li v-for="(item,index) in  persons" :key="index">
+                {{item.name}}-{{item.sex}}-{{item.age}}
+            </li>
+        </ul>
+        <h1>坦克 (循环遍历属性)</h1>
+        <ul>
+            <li v-for="(key,value) in  tank" :key="value">
+                {{key}}-{{value}}
+            </li>
+        </ul>
+        <h1>字符串 (循环遍历字符串)</h1>
+        <ul>
+            <li v-for="(char,index) in  str" :key="index">
+                {{char}}-{{index}}
+            </li>
+        </ul>
+        <h1>数字 (循环遍历数字)</h1>
+        <ul>
+            <li v-for="(number,index) in  5" :key="index">
+                {{number}}-{{index}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip=false;
+    const vm = new Vue({
+        el: "#root",
+        data() {
+            return {
+                persons:[
+                    {id:0,name:"小泽玛利亚",age:46,sex:"女"},
+                    {id:1,name:"深田永美",age:23,sex:"女"},
+                    {id:2,name:"苍井空",age:47,sex:"女"},
+                    {id:3,name:"吉泽明步",age:39,sex:"女"},
+                ],
+                tank:{
+                    name:"虎式-p",
+                    color:"黄色",
+                },
+                str:"hell0",
+            }
+        },
+    });
+</script>
+</html>

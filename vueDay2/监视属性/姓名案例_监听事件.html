@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件修饰符</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+<!--
+    computed和watch之间的区别:
+      1.computed能完成的功能，watch也能完成
+      2.watch能完成的功能，computed不一定能完成 比如 异步
+    两个重要的小原则:
+      1.所有Vue管理的函数，最好写成普通函数，这样this的指向才是vm或组件实例对象
+      2.所有不是Vue所有的函数（定时器的回调函数，ajax的回调函数等，promise的回调函数），最好写成箭头函数，
+    这样this的指向才是vm或组件实例的对象。
+    -->
+<div id="root">
+  姓:<input type="text" v-model="firstName" /> </br>
+  名:<input type="text" v-model="lastName" /> </br>
+  全名:<span>{{fullName}}</span>
+</div>
+</body>
+<script type="application/javascript">
+  Vue.config.productionTip=false;
+  const vm = new Vue({
+    el:"#root",
+    data(){
+      return{
+        firstName:"张",
+        lastName:"三",
+        fullName:"张-三"
+      }
+    },
+    methods:{
+    },
+    computed:{
+    },
+    watch:{
+      firstName(newValue){
+        setTimeout(()=>{
+          this.fullName=newValue+"-"+this.lastName;
+        },1000);
+      },
+      lastName(newValue){
+        setTimeout(()=>{
+          this.fullName=this.firstName+"-"+newValue;
+        },1000);
+      }
+    }
+  });
+</script>
+</html>

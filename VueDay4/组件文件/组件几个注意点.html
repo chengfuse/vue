@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>几个注意点</title>
+    <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<!--
+    Vue组件几个注意点:
+        1.关于组件名: （命名规则）
+            一个单词组成的:
+                第一种写法（首字母小写）：student
+                第二种写法（首字母大写）：Student
+           多个单词组成：
+                第一种写法（kebab-case命名）：'my-student'
+                第二种写法（CamelCase命名）：MyStudent
+           备注:
+                1.组件名尽可能回避HTML中已有的元素名称，例如: h2 H2 都不行。
+                2.可以使用name配置项指定组件在开发者工具中呈现的名字
+         2.关于组件标签:
+            第一种写法: <student></student>
+            第二种写法: <student/>
+            备注:不能使用脚手架时，<student/>会导致后续组件不能渲染。
+         3.一个简写方式:
+            const school = Vue.extend(options) 可简写为: const school = options
+ -->
+    <div id="root">
+        <student></student>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip=false;
+    //使用vue.extend 组件直接使用
+    // const  student=Vue.extend({
+    //     template:`
+    //       <div>
+    //         <div >学生名称：{{name}}</div>
+    //         <div >年龄：{{age}}</div>
+    //       </div>
+    //     `,
+    //     data(){
+    //         return{
+    //             name:"小泽玛丽亚",
+    //             age:"17",
+    //         }
+    //     }
+    // });
+    //此写法 vue 会自动调用extend才进入组件
+    const  student={
+        template:`
+          <div>
+            <div >学生名称：{{name}}</div>
+            <div >年龄：{{age}}</div>
+          </div>
+        `,
+        data(){
+            return{
+                name:"小泽玛丽亚",
+                age:"17",
+            }
+        }
+    }
+    //局部组件添加
+    const vm =new Vue({
+        el:"#root",
+        components:{
+            student
+        }
+
+    });
+</script>
+</html>

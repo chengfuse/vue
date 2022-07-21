@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2</title>
+    <script type="application/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+      <span>Hello ,{{name}}.{{address}} </span>
+  </div>
+</body>
+<script type="application/javascript">
+    Vue.config.productionTip=false;
+    new Vue({
+       el:"#root",
+       data: {
+           name:"张三",
+           address:"重庆"
+       }
+    });
+</script>
+</html>

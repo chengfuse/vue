@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<script src="../js/vue.global.js"></script>
+<body>
+    <div id="app">
+        count: {{ count }}
+    </div>
+</body>
+<script type="application/javascript">
+    const  app= {
+        data(){
+            return{
+                count:0
+            }
+        },
+        created(){
+            // setInterval(()=>{
+            //     this.count++;
+            // },1000);
+            let data={
+                name:"",
+                sex:"",
+            }
+            console.log(data)
+        }
+    }
+     Vue.createApp(app).mount('#app')
+</script>
+</html>

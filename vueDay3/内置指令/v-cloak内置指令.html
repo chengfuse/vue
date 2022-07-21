@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>内置指令</title>
+  <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<style>
+  [v-cloak]{
+    display: none;
+  }
+</style>
+<body>
+<div id="root">
+  你好{{name}}
+<!--  v-cloak 在vue加载完毕会删除该属性 属性本身和css 结合在vue还未加载完毕时使用 -->
+  <div v-cloak="name"></div>
+</div>
+</body>
+<script type="application/javascript">
+  Vue.config.productionTip=true;
+  const  vm=new Vue({
+    el:"#root",
+    data(){
+      return{
+        name:"hhhhh",
+        str:"<h1>hhhhh</h1>"
+      }
+    },
+    methods:{
+    }
+  });
+</script>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue生命周期</title>
+    <script type="application/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+   <!--  常用的生命走起钩子:
+            1.mounted ：发送ajax请求，启动定时器，绑定自定义事件，订阅消息等【初始化操作】
+            2.beforeDestroy: 清楚定时器，解绑自定义事件，取消订阅消息等【收尾工作】
+          关于销毁Vue实例:
+            1.销毁后借助Vue开发者工具看不到任何信息
+            2.销毁后自定义事件会失效，但原生的DOM事件依然有效。
+            3.一般不会在beforeDestroy操作数据，因为即便操作数据，也不会在触发更新流程了。
+   -->
+    <h2 :style="{opacity}">说客招募平台</h2>
+    <h3>当前招聘辆:{{number}}</h3>
+    <button @click="number++">招到一位</button>
+    <button  @click="remove">不招了销毁</button>
+</div>
+</body>
+<script type="application/javascript">
+    Vue.config.productionTip=true;
+    const  vm=new Vue({
+        el:"#root",
+        data(){
+            return{
+                timer:undefined,
+                number:0,
+                opacity:1,
+            }
+        },
+        beforeCreate(){
+            console.log("beforeCreate");
+        },
+        created(){
+            console.log("created");
+        },
+        methods:{
+            remove(){
+                this.$destroy();
+            }
+        },
+        //挂载之前
+        beforeMount(){
+            console.log("beforeMount");
+        },
+        mounted(){
+            // this.timer=setInterval(()=>{
+            //     if(this.opacity<=0) this.opacity =1;
+            //     this.opacity-=0.01;
+            // },16);
+            console.log("mounted");
+        },
+        beforeUpdate(){
+            debugger
+            console.log(this.number)
+            console.log("beforeUpdate");
+        },
+        updated(){
+            console.log("updated");
+        },
+        beforeDestroy(){
+            this.number=3
+            clearInterval(this.timer)
+            console.log("beforeDestroy");
+        },
+        destroyed(){
+
+            console.log("destroyed");
+        }
+    });
+</script>
+</html>
