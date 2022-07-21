@@ -7,10 +7,9 @@
         <router-link to="/home/news" class="list-group-item" active-class="active">News</router-link>
       </b-navbar-nav>
     </b-navbar>
+    <router-view>
 
-    <keep-alive include="News">
-      <router-view></router-view>
-    </keep-alive>
+    </router-view>
   </div>
 </template>
 

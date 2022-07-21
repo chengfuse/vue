@@ -2,11 +2,6 @@
   <b-container >
     <div>
       <h1>Vue Router Dome</h1>
-      <div>
-        <button @click="forward">前进</button>
-        <button @click="back">后退</button>
-        <button @click="two_back">后退2个</button>
-      </div>
     </div>
     <hr/>
     <b-row>
@@ -43,18 +38,6 @@ export default {
     return {
     }
   },
-  methods:{
-    //不借助浏览器实现页面的前后切换
-    back(){
-      this.$router.back(); //前进
-    },
-    forward(){
-      this.$router.forward(); //后退
-    },
-    two_back(){
-      this.$router.go(-2); //go 可以实现前后多个页面切换跳转 - 后退 + 前进
-    }
-  }
 }
 </script>
 
