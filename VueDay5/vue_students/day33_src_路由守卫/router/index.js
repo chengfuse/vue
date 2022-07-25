@@ -8,7 +8,7 @@ const router= new vueRouter({
             name:"about", //配置路由名称  在多个嵌套有利于简写代码
             path:"/about",
             component:About,
-            meta:{title:"关于",isAuth:true} //配置路由的附件信息
+            meta:{title:"关于"} //配置路由的附件信息
         },
         {
             path:"/home",
@@ -38,7 +38,7 @@ const router= new vueRouter({
                     path:"news",
                     component: ()=>import("@/pages/homePages/News"),
                     meta:{title:"主页",isAuth:true},
-                    // beforeEnter(to,from,next){ //前置独享路由守卫 写法 注：独享路由没有 后置一般配合全局后置
+                    // beforeEnter(to,from,next){ //前置独享路由守卫 注：独享路由没有 后置一般配合全局后置
                     //     console.log("前置路由守卫",to,from);
                     //         if(to.meta.isAuth){ //判断蛋当前路由是否需要进行权限控制
                     //             if(localStorage.getItem("vue_token")==='12345'){ //权限控制的具体规则
@@ -58,10 +58,10 @@ const router= new vueRouter({
 /**
  * 路由守卫：
  *  1.这作用：对路由进行权限控制
- *  2.分类：全局守卫，独享守卫，组件守卫 组件守卫 注:在 src/page/About.vue里查看
+ *  2.分类：全局守卫，独享守卫，组件守卫
  *
  */
-//全局前置守卫；初始化时执行，每次路由切换前执行 写法
+//全局前置守卫；初始化时执行，每次路由切换前执行
 // router.beforeEach((to,from,next)=>{
 //     console.log("前置路由守卫",to,from);
 //     if(to.meta.isAuth){ //判断蛋当前路由是否需要进行权限控制
